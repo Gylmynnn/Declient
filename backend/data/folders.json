@@ -1,0 +1,18 @@
+[
+  {
+    "id": "5f1bba2782e51869-20260905101014",
+    "collectionId": "bbffb74ee19b55d2-20260905101007",
+    "name": "GET",
+    "description": "",
+    "createdAt": "2026-09-05T10:10:14+08:00",
+    "updatedAt": "2026-09-05T10:10:14+08:00"
+  },
+  {
+    "id": "38853f7d48ad84b9-20260905101251",
+    "collectionId": "bbffb74ee19b55d2-20260905101007",
+    "name": "POST",
+    "description": "",
+    "createdAt": "2026-09-05T10:12:51+08:00",
+    "updatedAt": "2026-09-05T10:12:51+08:00"
+  }
+]

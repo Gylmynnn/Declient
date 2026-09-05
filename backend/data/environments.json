@@ -1,0 +1,15 @@
+[
+  {
+    "id": "be8bb69d070be727-20260905003003",
+    "name": "Dev",
+    "variables": [
+      {
+        "key": "pokemon",
+        "value": "https://pokeapi.co/api/v2/pokemon",
+        "enabled": true
+      }
+    ],
+    "createdAt": "2026-09-05T00:30:03+08:00",
+    "updatedAt": "2026-09-05T00:30:03+08:00"
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "id": "e07ba0a6c40f3d68-20260905101033",
+    "collectionId": "bbffb74ee19b55d2-20260905101007",
+    "folderId": "5f1bba2782e51869-20260905101014",
+    "name": "Get all product",
+    "description": "",
+    "method": "GET",
+    "url": "https://fakestoreapi.com/products",
+    "params": [],
+    "headers": [],
+    "bodyType": "none",
+    "body": "",
+    "auth": {
+      "type": "none",
+      "token": "fsdfsfsf"
+    },
+    "createdAt": "2026-09-05T10:10:33+08:00",
+    "updatedAt": "2026-09-05T11:02:51+08:00"
+  },
+  {
+    "id": "6a6f48bf2ebe2c5f-20260905101303",
+    "collectionId": "bbffb74ee19b55d2-20260905101007",
+    "folderId": "38853f7d48ad84b9-20260905101251",
+    "name": "Create product",
+    "description": "",
+    "method": "POST",
+    "url": "https://fakestoreapi.com/products",
+    "params": [],
+    "headers": [],
+    "bodyType": "none",
+    "body": "",
+    "auth": {
+      "type": "none"
+    },
+    "createdAt": "2026-09-05T10:13:03+08:00",
+    "updatedAt": "2026-09-05T10:13:03+08:00"
+  }
+]
