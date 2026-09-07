@@ -76,7 +76,7 @@ class AppSnack {
   }
 
   static void success(String message,
-      {String title = 'Sukses', Duration duration = const Duration(seconds: 2)}) {
+      {String title = 'Success', Duration duration = const Duration(seconds: 2)}) {
     _show(title: title, message: message, accent: AppColors.green, icon: LucideIcons.checkCircle2, duration: duration);
   }
 
@@ -91,7 +91,7 @@ class AppSnack {
   }
 
   static void warning(String message,
-      {String title = 'Validasi', Duration duration = const Duration(seconds: 2)}) {
+      {String title = 'Validation', Duration duration = const Duration(seconds: 2)}) {
     _show(title: title, message: message, accent: AppColors.yellow, icon: LucideIcons.alertTriangle, duration: duration);
   }
 }

@@ -11,5 +11,18 @@
     ],
     "createdAt": "2026-09-05T00:30:03+08:00",
     "updatedAt": "2026-09-05T00:30:03+08:00"
+  },
+  {
+    "id": "c6b2e9fd3d37eaef-20260907212704",
+    "name": "Prod",
+    "variables": [
+      {
+        "key": "baseUrl",
+        "value": "http://localhost",
+        "enabled": true
+      }
+    ],
+    "createdAt": "2026-09-07T21:27:04+08:00",
+    "updatedAt": "2026-09-07T21:27:04+08:00"
   }
 ]

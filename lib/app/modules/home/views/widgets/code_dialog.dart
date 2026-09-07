@@ -161,7 +161,7 @@ class CodeDialog extends GetView<RequestEditorController> {
           ],
         ),
       ),
-      actions: [TextButton(onPressed: () => Get.back(), child: const Text('Tutup'))],
+      actions: [TextButton(onPressed: () => Get.back(), child: const Text('Close'))],
     );
   }
 }

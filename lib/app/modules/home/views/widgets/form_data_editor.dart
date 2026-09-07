@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_menu.dart';
 import '../../../../data/models/form_data_field.dart';
 
 /// Editor multipart/form-data: rows key + tipe (Text/File) + value/file.
@@ -50,7 +51,7 @@ class FormDataEditor extends StatelessWidget {
                     Icon(LucideIcons.upload,
                         size: 32, color: AppColors.comment),
                     SizedBox(height: 8),
-                    Text('Belum ada field — klik Add field',
+                    Text('No fields yet — click Add field',
                         style: TextStyle(
                             color: AppColors.comment, fontSize: 12)),
                   ],
@@ -102,30 +103,23 @@ class FormDataEditor extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 6),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                        decoration: BoxDecoration(
-                          color: AppColors.backgroundDark,
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: AppColors.surface),
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: f.type,
-                            dropdownColor: AppColors.backgroundDark,
-                            style: const TextStyle(
-                                color: AppColors.mutedForeground, fontSize: 12),
-                            items: const [
-                              DropdownMenuItem(
-                                  value: 'text', child: Text('Text')),
-                              DropdownMenuItem(
-                                  value: 'file', child: Text('File')),
-                            ],
-                            onChanged: (v) {
-                              if (v != null) onUpdate(i, f.copyWith(type: v));
-                            },
-                          ),
-                        ),
+                      FancyDropdown<String>(
+                        value: f.type,
+                        width: 84,
+                        height: 32,
+                        compact: true,
+                        accent: AppColors.cyan,
+                        textStyle: const TextStyle(
+                            color: AppColors.mutedForeground,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500),
+                        onChanged: (v) {
+                          if (v != null) onUpdate(i, f.copyWith(type: v));
+                        },
+                        items: const [
+                          DropdownMenuItem(value: 'text', child: Text('Text')),
+                          DropdownMenuItem(value: 'file', child: Text('File')),
+                        ],
                       ),
                       const SizedBox(width: 6),
                       Expanded(flex: 3, child: _ValueCell(field: f, index: i, onUpdate: onUpdate, onPickFile: onPickFile, onClearFile: onClearFile)),
@@ -202,9 +196,9 @@ class _ValueCell extends StatelessWidget {
           Expanded(
             child: Text(
               !hasFile
-                  ? 'Pilih file…'
+                  ? 'Choose file…'
                   : missing
-                      ? '${f.fileName} • klik untuk pilih ulang'
+                      ? '${f.fileName} • click to reselect'
                       : '${f.fileName} • ${formatFileSize(f.fileSize)}',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

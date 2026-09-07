@@ -69,8 +69,8 @@ class ResponsePanel extends GetView<RequestEditorController> {
                   final home = Get.find<HomeController>();
                   return IconButton(
                     tooltip: home.verticalSplit.value
-                        ? 'Split horizontal (atas-bawah)'
-                        : 'Split vertikal (kiri-kanan)',
+                        ? 'Split horizontal (top-bottom)'
+                        : 'Split vertical (left-right)',
                     onPressed: home.toggleSplit,
                     icon: Icon(
                       home.verticalSplit.value
@@ -105,7 +105,7 @@ class ResponsePanel extends GetView<RequestEditorController> {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'Belum ada response. Klik Send untuk mengeksekusi request.',
+                        'No response yet. Click Send to execute the request.',
                         style: TextStyle(
                           color: AppColors.comment,
                           fontSize: 12,
@@ -174,7 +174,7 @@ class ResponsePanel extends GetView<RequestEditorController> {
                                   Clipboard.setData(
                                       ClipboardData(text: res.body));
                                   AppSnack.success(
-                                    'Body disalin ke clipboard',
+                                    'Body copied to clipboard',
                                     duration: const Duration(seconds: 1),
                                   );
                                 },
@@ -190,7 +190,7 @@ class ResponsePanel extends GetView<RequestEditorController> {
                                     Obx(
                                       () => Text(
                                         controller.bodyTruncated.value
-                                            ? '${controller.bodyLineCount.value} lines (dipotong)'
+                                            ? '${controller.bodyLineCount.value} lines (truncated)'
                                             : '${controller.bodyLineCount.value} lines',
                                         style: const TextStyle(
                                           color: AppColors.comment,
@@ -240,14 +240,14 @@ class HistoryPanel extends GetView<HistoryController> {
         Row(
           children: [
             const Text(
-              'Terakhir 50 eksekusi',
+              'Last 50 executions',
               style: TextStyle(color: AppColors.comment, fontSize: 12),
             ),
             const Spacer(),
             TextButton.icon(
               onPressed: () => AppDialog.confirm(
-                title: 'Hapus history?',
-                message: 'Semua riwayat eksekusi akan dihapus.',
+                title: 'Clear history?',
+                message: 'All execution history will be deleted.',
                 onConfirm: controller.clear,
               ),
               icon: const Icon(LucideIcons.trash2, size: 16),
@@ -272,7 +272,7 @@ class HistoryPanel extends GetView<HistoryController> {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'History kosong',
+                      'Empty history',
                       style: TextStyle(
                         color: AppColors.comment,
                         fontSize: 12,

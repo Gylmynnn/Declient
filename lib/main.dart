@@ -10,11 +10,11 @@ Future<void> main() async {
   await hideTitleBar();
   Get.put<SettingsController>(SettingsController(), permanent: true);
 
-  runApp(const MyApp());
+  runApp(const RootApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class RootApp extends GetView<SettingsController> {
+  const RootApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,10 @@ class MyApp extends StatelessWidget {
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       defaultTransition: Transition.fade,
-      builder: (context, child) {
+      builder: (BuildContext context, Widget? child) {
         return Obx(() {
-          final scale = Get.find<SettingsController>().uiScale.value;
-          final mq = MediaQuery.of(context);
+          final double scale = controller.uiScale.value;
+          final MediaQueryData mq = MediaQuery.of(context);
           return MediaQuery(
             data: mq.copyWith(textScaler: TextScaler.linear(scale)),
             child: child!,

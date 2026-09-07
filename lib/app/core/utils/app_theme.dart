@@ -11,7 +11,7 @@ class AppTheme {
       fontFamily: fontFamily,
       scaffoldBackgroundColor: AppColors.background,
       colorScheme: const ColorScheme.dark(
-        primary: AppColors.blue,
+        primary: AppColors.green,
         secondary: AppColors.magenta,
         surface: AppColors.backgroundDark,
         surfaceContainerHighest: AppColors.surface,
@@ -41,15 +41,16 @@ class AppTheme {
         fillColor: AppColors.backgroundDark,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppColors.surface),
+          // borderSide: const BorderSide(color: AppColors.surface),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppColors.surface),
+          borderSide: BorderSide.none,
+          // borderSide: const BorderSide(color: AppColors.surface),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: AppColors.blue, width: 1.5),
+          borderSide: const BorderSide(color: AppColors.green, width: 1.5),
         ),
         labelStyle: const TextStyle(color: AppColors.mutedForeground),
         hintStyle: const TextStyle(color: AppColors.comment),
@@ -75,7 +76,10 @@ class AppTheme {
       ),
       snackBarTheme: const SnackBarThemeData(
         backgroundColor: AppColors.backgroundDark,
-        contentTextStyle: TextStyle(color: AppColors.foreground, fontSize: 12.5),
+        contentTextStyle: TextStyle(
+          color: AppColors.foreground,
+          fontSize: 12.5,
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
           side: BorderSide(color: AppColors.blue, width: 1.2),
@@ -90,7 +94,7 @@ class AppTheme {
       ),
       popupMenuTheme: PopupMenuThemeData(
         color: AppColors.backgroundDark,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
       expansionTileTheme: const ExpansionTileThemeData(
         shape: RoundedRectangleBorder(side: BorderSide.none),

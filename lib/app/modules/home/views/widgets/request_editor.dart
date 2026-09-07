@@ -3,6 +3,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:get/get.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_fonts.dart';
+import '../../../../core/utils/app_menu.dart';
 import '../../../../core/utils/method_colors.dart';
 import '../../../../data/models/key_value.dart';
 import '../../controllers/request_editor_controller.dart';
@@ -29,54 +30,61 @@ class RequestEditor extends GetView<RequestEditorController> {
           const SizedBox(height: 6),
           Row(
             children: [
-              Obx(() => Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                        color: httpMethodColor(
-                          controller.method.value,
-                        ).withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: controller.method.value,
-                        dropdownColor: AppColors.backgroundDark,
-                        style: TextStyle(
-                            color: httpMethodColor(controller.method.value),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700),
-                        items: RequestEditorController.methods
-                            .map((m) => DropdownMenuItem(
-                                value: m,
-                                child: Text(m,
-                                    style: TextStyle(
-                                        color: httpMethodColor(m),
-                                        fontWeight: FontWeight.w700))))
-                            .toList(),
-                        onChanged: (v) {
-                          if (v != null) controller.method.value = v;
-                        },
+              Obx(() {
+                    final m = controller.method.value;
+                    final c = httpMethodColor(m);
+                    return FancyDropdown<String>(
+                      value: m,
+                      width: 92,
+                      accent: c,
+                      textStyle: TextStyle(
+                        color: c,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
                       ),
-                    ),
-                  )),
+                      hintStyle: const TextStyle(
+                        color: AppColors.comment,
+                        fontSize: 13,
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 8),
+                      onChanged: (v) {
+                        if (v != null) controller.method.value = v;
+                      },
+                      items: RequestEditorController.methods
+                          .map((m) => DropdownMenuItem<String>(
+                                value: m,
+                                child: Text(
+                                  m,
+                                  style: TextStyle(
+                                    color: httpMethodColor(m),
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                    );
+                  }),
               const SizedBox(width: 8),
               Expanded(
-                child: TextField(
-                  controller: controller.urlController,
-                  style: TextStyle(
-                      color: AppColors.foreground,
-                      fontSize: 13,
-                      fontFamily: AppFonts.mono),
-                  decoration: const InputDecoration(
-                    hintText: 'https://{{baseUrl}}/users?page=1',
-                    prefixIcon: Icon(
-                      LucideIcons.globe,
-                      size: 17,
-                      color: AppColors.comment,
-                    ),
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                  ),
-                ),
+                child: Obx(() => TextField(
+                      controller: controller.urlController,
+                      style: TextStyle(
+                          color: AppColors.foreground,
+                          fontSize: 13,
+                          fontFamily: AppFonts.mono),
+                      decoration: const InputDecoration(
+                        hintText: 'https://{{baseUrl}}/users?page=1',
+                        prefixIcon: Icon(
+                          LucideIcons.globe,
+                          size: 17,
+                          color: AppColors.comment,
+                        ),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                      ),
+                    )),
               ),
             ],
           ),
@@ -85,7 +93,7 @@ class RequestEditor extends GetView<RequestEditorController> {
             controller: controller.nameController,
             style: const TextStyle(color: AppColors.foreground, fontSize: 13),
             decoration: const InputDecoration(
-              hintText: 'Nama request (untuk disimpan di collection)',
+              hintText: 'Request name (to be saved in collection)',
               contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             ),
           ),
@@ -175,7 +183,7 @@ class KeyValueEditor extends StatelessWidget {
                     Icon(LucideIcons.list,
                         size: 32, color: AppColors.comment),
                     SizedBox(height: 8),
-                    Text('Belum ada baris — klik Add row',
+                    Text('No rows yet — click Add row',
                         style: TextStyle(
                             color: AppColors.comment, fontSize: 12)),
                   ],
@@ -248,10 +256,13 @@ class _BodyTab extends GetView<RequestEditorController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Obx(() => DropdownButtonFormField<String>(
-              initialValue: controller.bodyType.value,
-              dropdownColor: AppColors.backgroundDark,
-              decoration: const InputDecoration(contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10)),
+        Obx(() => FancyDropdown<String>(
+              icon: LucideIcons.package,
+              value: controller.bodyType.value,
+              accent: AppColors.magenta,
+              onChanged: (v) {
+                if (v != null) controller.bodyType.value = v;
+              },
               items: const [
                 DropdownMenuItem(value: 'none', child: Text('none')),
                 DropdownMenuItem(value: 'json', child: Text('JSON')),
@@ -261,9 +272,6 @@ class _BodyTab extends GetView<RequestEditorController> {
                     value: 'multipart',
                     child: Text('form-data (file upload)')),
               ],
-              onChanged: (v) {
-                if (v != null) controller.bodyType.value = v;
-              },
             )),
         const SizedBox(height: 8),
         Expanded(
@@ -277,7 +285,7 @@ class _BodyTab extends GetView<RequestEditorController> {
                 ),
                 child: const Center(
                   child: Text(
-                    'No body — pilih JSON / raw / form / form-data untuk mengisi body.',
+                    'No body — select JSON / raw / form / form-data to fill the body.',
                     style: TextStyle(color: AppColors.comment, fontSize: 12),
                   ),
                 ),
@@ -309,18 +317,18 @@ class _AuthTab extends GetView<RequestEditorController> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Obx(() => DropdownButtonFormField<String>(
-              initialValue: controller.authType.value,
-              dropdownColor: AppColors.backgroundDark,
-              decoration: const InputDecoration(contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10)),
+        Obx(() => FancyDropdown<String>(
+              icon: LucideIcons.shield,
+              value: controller.authType.value,
+              accent: AppColors.yellow,
+              onChanged: (v) {
+                if (v != null) controller.authType.value = v;
+              },
               items: const [
                 DropdownMenuItem(value: 'none', child: Text('No auth')),
                 DropdownMenuItem(value: 'bearer', child: Text('Bearer token')),
                 DropdownMenuItem(value: 'basic', child: Text('Basic auth')),
               ],
-              onChanged: (v) {
-                if (v != null) controller.authType.value = v;
-              },
             )),
         const SizedBox(height: 10),
         Obx(() {

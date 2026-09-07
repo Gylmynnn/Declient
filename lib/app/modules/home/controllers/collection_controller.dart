@@ -18,6 +18,17 @@ class CollectionController extends GetxController {
   final RxString searchQuery = ''.obs;
   final RxBool isLoading = false.obs;
 
+  final RxSet<String> expandedCollections = <String>{}.obs;
+  final RxSet<String> expandedFolders = <String>{}.obs;
+
+  void toggleCollection(String id) {
+    if (!expandedCollections.add(id)) expandedCollections.remove(id);
+  }
+
+  void toggleFolder(String id) {
+    if (!expandedFolders.add(id)) expandedFolders.remove(id);
+  }
+
   @override
   void onInit() {
     super.onInit();

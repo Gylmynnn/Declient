@@ -22,7 +22,7 @@ class HomeView extends GetView<HomeController> {
             const Divider(height: 1),
             Expanded(
               child: LayoutBuilder(
-                builder: (context, cons) => Obx(() {
+                builder: (BuildContext context, BoxConstraints cons) => Obx(() {
                   final vertical = controller.verticalSplit.value;
                   final f = controller.responseFraction.value;
                   final editorFlex = ((1 - f) * 1000).round();
@@ -53,9 +53,9 @@ class HomeView extends GetView<HomeController> {
                                     axis: Axis.horizontal,
                                     onDrag: (d) =>
                                         controller.setResponseFraction(
-                                      controller.responseFraction.value -
-                                          d.delta.dx / cons.maxWidth,
-                                    ),
+                                          controller.responseFraction.value -
+                                              d.delta.dx / cons.maxWidth,
+                                        ),
                                   ),
                                   Expanded(
                                     flex: responseFlex,
@@ -74,9 +74,9 @@ class HomeView extends GetView<HomeController> {
                                     axis: Axis.vertical,
                                     onDrag: (d) =>
                                         controller.setResponseFraction(
-                                      controller.responseFraction.value -
-                                          d.delta.dy / cons.maxHeight,
-                                    ),
+                                          controller.responseFraction.value -
+                                              d.delta.dy / cons.maxHeight,
+                                        ),
                                   ),
                                   Expanded(
                                     flex: responseFlex,

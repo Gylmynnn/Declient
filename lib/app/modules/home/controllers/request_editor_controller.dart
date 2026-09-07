@@ -515,7 +515,7 @@ class RequestEditorController extends GetxController {
       }
       if (f.filePath.isEmpty) {
         AppSnack.warning(
-            'Field "${f.key}" bertipe file tapi belum ada file. Klik ikon file untuk memilih.');
+            'Field "${f.key}" is a file type but no file is selected. Click the file icon to choose one.');
         return false;
       }
       try {
@@ -560,7 +560,7 @@ class RequestEditorController extends GetxController {
 
   Future<void> save() async {
     if (!hasSelection) {
-      AppSnack.info('Pilih / buat request di collection dulu untuk menyimpan');
+      AppSnack.info('Select or create a request in a collection first to save');
       return;
     }
     try {

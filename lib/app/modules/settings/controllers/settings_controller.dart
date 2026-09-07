@@ -67,6 +67,21 @@ class SettingsController extends GetxController {
     codeSize.value = v.clamp(10.0, 18.0);
     _prefs ??= await SharedPreferences.getInstance();
     await _prefs!.setDouble(_kCodeSize, codeSize.value);
+    apply();
+  }
+
+  /// Kembalikan ke bawaan lalu terapkan langsung.
+  Future<void> resetDefaults() async {
+    uiFont.value = system;
+    monoFont.value = jetbrains;
+    uiScale.value = 1.0;
+    codeSize.value = 12.0;
+    _prefs ??= await SharedPreferences.getInstance();
+    await _prefs!.setString(_kUiFont, system);
+    await _prefs!.setString(_kMonoFont, jetbrains);
+    await _prefs!.setDouble(_kUiScale, 1.0);
+    await _prefs!.setDouble(_kCodeSize, 12.0);
+    apply();
   }
 
   /// Terapkan font ke theme aktif. Aman dipanggil berkali-kali.
